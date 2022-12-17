@@ -3,36 +3,45 @@ package cat.trombo.alertatrombo.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 import androidx.compose.ui.window.Popup
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
 import cat.trombo.alertatrombo.domain.Person
+import cat.trombo.alertatrombo.events.LifeEvent
 import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 import cat.trombo.alertatrombo.ui.theme.*
+
 
 
 //@Preview()
 @Composable
 fun MainScreen(navController: NavHostController) {
     val shape = RoundedCornerShape(12.dp)
-    val viewModel = MainScreenVM(LocalContext.current)
+
+    val viewModel = MainScreenVM
     val p: Person = viewModel.getPerson(LocalContext.current)
-    var pop by remember {mutableStateOf(false)}
+
+//    val e : LifeEvent? = viewModel.currentEvent
+    val uiState by viewModel.uiState.collectAsState()
+
+    //println(state.value.person.height)
+
+
     var o1 = ""
     var o2 = ""
 
@@ -61,7 +70,6 @@ fun MainScreen(navController: NavHostController) {
                 CustomProgressBar()
             }
 
-            Button(onClick = {pop = true;}){Text("click")}
 
             Box(
                 modifier = Modifier
@@ -70,18 +78,26 @@ fun MainScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .background(color = Color.Green)
                     .height(100.dp)
-            )
+            ) {
+                Box() {
+                    if (uiState.currentEvent != null)
+                        pop(uiState.currentEvent)
+
+                }
+            }
 //             Bottom box with tabs
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
+
                 .background(color = LightBackground)) {
+
             //TabOnlyTitle()
             //CustomTabs()
             tabs(p)
             }
         }
-        if(pop){
+        if (uiState.currentEvent != null ){
             Popup(
                 alignment = Alignment.Center,
                 ) {
@@ -91,13 +107,26 @@ fun MainScreen(navController: NavHostController) {
                     .clip(shape)
                     .background(color = Color.White)
                     .height(200.dp), contentAlignment = Alignment.Center){
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                        Button(onClick = { o1 = "1"; pop = false }) {
-                            Text("option 1")
+                    Column() {
+                        uiState.currentEvent?.title?.let{Text(uiState.currentEvent!!.title, color = DarkText, fontWeight = FontWeight.Bold)}
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Button(onClick = {viewModel.ReturnEventState(1)}) {
+                                Text("option 1")
+                            }
+                            Button(onClick = {viewModel.ReturnEventState(2)}) {
+                                Text("option 2")
+                            }
                         }
-                        Button(onClick = { o2 = "2"; pop = false }) {
-                            Text("option 2")
-                        }
+//                        LazyRow(
+//                            modifier = Modifier.fillMaxWidth(),
+//                            horizontalArrangement = Arrangement.Center){
+//                            items(uiState.currentEvent!!.options.size){
+//                                uiState.currentEvent!!.options.forEach()
+//                            }
+//                        }
                     }
                 }
             }
@@ -169,5 +198,12 @@ fun tabs(p:Person) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun pop(e:LifeEvent?) {
+    Box() {
+        Text(e!!.title)
     }
 }
