@@ -1,12 +1,14 @@
 package cat.trombo.alertatrombo.viewmodels
 
 import android.content.Context
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.trombo.alertatrombo.domain.*
 import cat.trombo.alertatrombo.events.EventManager
 import cat.trombo.alertatrombo.events.LifeEvent
 import cat.trombo.alertatrombo.repo.JsonObjectRepo
+import cat.trombo.alertatrombo.repo.JsonPersonDataRepo
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -42,4 +44,12 @@ class MainScreenVM (context: Context) : ViewModel() {
         }
     }
 
+    val repo = JsonPersonDataRepo();
+
+    fun getPerson(context: Context):Person{
+       var p:Person? = repo.loadData(context, "agusti.json" );
+        println(p?.name)
+        if(p != null) return p
+        return Person("null", Gender.Other)
+    }
 }
