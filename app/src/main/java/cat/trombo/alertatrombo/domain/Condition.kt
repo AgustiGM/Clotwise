@@ -1,5 +1,12 @@
 package cat.trombo.alertatrombo.domain
 
-class Condition {
+data class Condition(val id: Int,
+                val name: String,
+                val glucose: Double,
+                val harmful: Int,
+                val healthy: Int) {
+
+
+
 
 }
