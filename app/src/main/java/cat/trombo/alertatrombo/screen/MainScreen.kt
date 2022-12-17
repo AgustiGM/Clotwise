@@ -3,6 +3,7 @@ package cat.trombo.alertatrombo.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -26,7 +27,6 @@ import cat.trombo.alertatrombo.domain.Person
 import cat.trombo.alertatrombo.events.LifeEvent
 import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 import cat.trombo.alertatrombo.ui.theme.*
-
 
 
 //@Preview()
