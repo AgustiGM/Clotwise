@@ -20,8 +20,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
 import cat.trombo.alertatrombo.domain.Person
+import cat.trombo.alertatrombo.events.LifeEvent
 import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 import cat.trombo.alertatrombo.ui.theme.*
+import java.util.concurrent.Future
 
 
 //@Preview()
@@ -30,6 +32,7 @@ fun MainScreen(navController: NavHostController) {
     val shape = RoundedCornerShape(12.dp)
     val viewModel = MainScreenVM(LocalContext.current)
     val p: Person = viewModel.getPerson(LocalContext.current)
+    val e : LifeEvent? = viewModel.currentEvent
     println(p.height)
     Box {
         Image(
