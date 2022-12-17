@@ -11,5 +11,20 @@ class MainScreenVM (context: Context) {
     val hobbyList: List<Hobby> = JsonObjectRepo.loadHobbies(context)
     val conditionList: List<Condition> = JsonObjectRepo.loadConditions(context)
 
-    val currentUser : Person? = null
+    var currentUser : Person? = null
+
+
+    fun setPerson (name: String, gender: Gender, age: Int, height: Double, weight: Double, job: Job ){
+
+        this.currentUser=Person(name,gender)
+
+        this.currentUser?.age  =  age
+        this.currentUser?.height = height
+        this.currentUser?.weight = weight
+        this.currentUser?.job = job
+
+
+    }
+
+
 }
