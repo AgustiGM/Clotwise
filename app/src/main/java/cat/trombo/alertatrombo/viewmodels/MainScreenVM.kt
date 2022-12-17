@@ -1,28 +1,30 @@
 package cat.trombo.alertatrombo.viewmodels
 
 import android.content.Context
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cat.trombo.alertatrombo.domain.*
 import cat.trombo.alertatrombo.events.EventManager
 import cat.trombo.alertatrombo.events.LifeEvent
-import cat.trombo.alertatrombo.repo.JsonObjectRepo
 import cat.trombo.alertatrombo.repo.JsonPersonDataRepo
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.math.abs
 
-class MainScreenVM (context: Context) : ViewModel() {
+object MainScreenVM : ViewModel() {
 
     init {
         initEvents();
-
-            run();
-
+        run();
     }
+
+    private val _uiState = MutableStateFlow(MSUiState(null))
+    val uiState: StateFlow<MSUiState> = _uiState.asStateFlow()
 
 //    val foodList: List<Food> = JsonObjectRepo.loadFoods(context)
 //    val jobList: List<Job> = JsonObjectRepo.loadJobs(context)
@@ -31,7 +33,7 @@ class MainScreenVM (context: Context) : ViewModel() {
 
     val currentUser : Person? = null
 
-    val currentEvent : LifeEvent? = null
+    var cevent : LifeEvent? = null
 
     private fun initEvents() {
         val e1: LifeEvent = LifeEvent("Et toca la loteria",
@@ -49,11 +51,26 @@ class MainScreenVM (context: Context) : ViewModel() {
     private fun run() {
         viewModelScope.launch {
         while (EventManager.eventQueue.size >= 1) {
+
             delay(abs(Random(54).nextLong()%8000))
-                val currentEvent = EventManager.getEvent()
+            cevent = null
+            cevent = EventManager.getEvent()
+            updateState(cevent)
+
             }
         }
     }
+
+    private fun updateState(cevent: LifeEvent?) {
+        _uiState.update {  currentState ->
+            currentState.copy(
+                currentEvent = cevent
+            )
+        }
+
+    }
+
+    private
 
     val repo = JsonPersonDataRepo();
 
