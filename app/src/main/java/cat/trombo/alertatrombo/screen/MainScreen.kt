@@ -8,36 +8,46 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 import androidx.compose.ui.window.Popup
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
 import cat.trombo.alertatrombo.domain.Person
+import cat.trombo.alertatrombo.events.LifeEvent
 import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 import cat.trombo.alertatrombo.ui.theme.*
+
 
 
 //@Preview()
 @Composable
 fun MainScreen(navController: NavHostController) {
     val shape = RoundedCornerShape(12.dp)
-    val viewModel = MainScreenVM(LocalContext.current)
+
+    val viewModel = MainScreenVM
     val p: Person = viewModel.getPerson(LocalContext.current)
+
+//    val e : LifeEvent? = viewModel.currentEvent
+    val uiState by viewModel.uiState.collectAsState()
+
+    var event : LifeEvent? = viewModel.cevent
+    //println(state.value.person.height)
+
+
     var pop by remember {mutableStateOf(false)}
     var o1 = ""
     var o2 = ""
 
 
     println(p.height)
+
     Box {
         Image(
                 painter = painterResource(id = R.drawable.backgroundphotofield),
@@ -72,12 +82,20 @@ fun MainScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .background(color = Color.Green)
                     .height(100.dp)
-            )
+            ) {
+                Box() {
+                    if (uiState.currentEvent != null)
+                        pop(uiState.currentEvent)
+
+                }
+            }
 //             Bottom box with tabs
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
+
                 .background(color = LightBackground)) {
+
             //TabOnlyTitle()
             //CustomTabs()
             tabs(p)
@@ -172,5 +190,12 @@ fun tabs(p:Person) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun pop(e:LifeEvent?) {
+    Box() {
+        Text(e!!.title)
     }
 }
