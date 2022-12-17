@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -40,10 +41,6 @@ fun MainScreen(navController: NavHostController) {
     val uiState by viewModel.uiState.collectAsState()
 
     //println(state.value.person.height)
-
-
-    var o1 = ""
-    var o2 = ""
 
     Box {
         Image(
@@ -108,7 +105,13 @@ fun MainScreen(navController: NavHostController) {
                     .background(color = Color.White)
                     .height(200.dp), contentAlignment = Alignment.Center){
                     Column() {
-                        uiState.currentEvent?.title?.let{Text(uiState.currentEvent!!.title, color = DarkText, fontWeight = FontWeight.Bold)}
+                        uiState.currentEvent?.title?.let {
+                            Text(
+                                uiState.currentEvent!!.title,
+                                color = DarkText,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
@@ -120,19 +123,28 @@ fun MainScreen(navController: NavHostController) {
                                 Text("option 2")
                             }
                         }
-//                        LazyRow(
-//                            modifier = Modifier.fillMaxWidth(),
-//                            horizontalArrangement = Arrangement.Center){
-//                            items(uiState.currentEvent!!.options.size){
-//                                uiState.currentEvent!!.options.forEach()
+//                        uiState.currentEvent?.options.let {
+//                            LazyRow(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                horizontalArrangement = Arrangement.Center
+//                            ) {
+////                            items(uiState.currentEvent!!.options.size){
+////                                uiState.currentEvent!!.options.forEach{
+//                                itemsIndexed(uiState.currentEvent!!.options) { index, item ->
+//                                    Button(onClick = { viewModel.ReturnEventState(index) }) {
+//                                        Text("option " + index)
+//                                    }
+//                                }
 //                            }
+//
 //                        }
+                    }
                     }
                 }
             }
         }
     }
-}
+
 
 //@Preview()
 @Composable
