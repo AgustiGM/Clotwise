@@ -36,8 +36,6 @@ fun MainScreen(navController: NavHostController) {
     var o1 = ""
     var o2 = ""
 
-
-    println(p.height)
     Box {
         Image(
                 painter = painterResource(id = R.drawable.backgroundphotofield),
@@ -85,16 +83,15 @@ fun MainScreen(navController: NavHostController) {
         }
         if(pop){
             Popup(
-                alignment = Alignment.CenterStart,
-
+                alignment = Alignment.Center,
                 ) {
                 Box(modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth()
                     .clip(shape)
                     .background(color = Color.White)
-                    .height(200.dp)){
-                    Row() {
+                    .height(200.dp), contentAlignment = Alignment.Center){
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                         Button(onClick = { o1 = "1"; pop = false }) {
                             Text("option 1")
                         }
