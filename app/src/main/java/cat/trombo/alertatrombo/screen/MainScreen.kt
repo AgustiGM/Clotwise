@@ -1,4 +1,4 @@
-package cat.trombo.alertatrombo
+package cat.trombo.alertatrombo.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,18 +16,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 
-@Preview()
+//@Preview()
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavHostController) {
     val shape = RoundedCornerShape(12.dp)
     Box {
-        Image(
+        /*Image(
                 painter = painterResource(id = R.drawable.backgroundphotofield),
                 contentDescription = null,
 //            modifier = Modifier.fillMaxHeight()
-            )
+            )*/
         Column(
             modifier = Modifier.fillMaxWidth().fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceBetween
