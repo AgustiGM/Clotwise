@@ -15,6 +15,21 @@ class MainScreenVM (context: Context) {
 //
 //    val currentUser : Person? = null
 
+    var currentUser : Person? = null
+
+
+    fun setPerson (name: String, gender: Gender, age: Int, height: Double, weight: Double, job: Job ){
+
+        this.currentUser=Person(name,gender)
+
+        this.currentUser?.age  =  age
+        this.currentUser?.height = height
+        this.currentUser?.weight = weight
+        this.currentUser?.job = job
+
+
+    }
+
     val repo = JsonPersonDataRepo();
 
     fun getPerson(context: Context):Person{
@@ -23,4 +38,5 @@ class MainScreenVM (context: Context) {
         if(p != null) return p
         return Person("null", Gender.Other)
     }
+
 }
