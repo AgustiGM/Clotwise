@@ -37,7 +37,6 @@ object MainScreenVM : ViewModel() {
 //    val hobbyList: List<Hobby> = JsonObjectRepo.loadHobbies(context)
 //    val conditionList: List<Condition> = JsonObjectRepo.loadConditions(context)
 
-    //val currentUser : Person? = null
 
     var cevent : LifeEvent? = null
 
@@ -81,24 +80,30 @@ object MainScreenVM : ViewModel() {
 
     }
 
-    private
+
 
     var currentUser : Person? = null
 
 
-    fun setPerson (name: String, gender: Gender, age: Int, height: Double, weight: Double, job: Job ){
+
+    fun setPerson (name: String, gender: Gender, age: Int, height: Double, weight: Double/*, job: Job*/ ){
 
         this.currentUser=Person(name,gender)
 
         this.currentUser?.age  =  age
         this.currentUser?.height = height
         this.currentUser?.weight = weight
-        this.currentUser?.job = job
+       // this.currentUser?.job = job
 
+        println(this.currentUser?.age)
+        println(this.currentUser?.weight)
+        println(this.currentUser?.height)
+        println(this.currentUser?.name)
 
     }
 
     val repo = JsonPersonDataRepo();
+
     fun getPerson(context: Context):Person{
        var p:Person? = repo.loadData(context, "agusti.json" );
         println(p?.name)
