@@ -1,5 +1,11 @@
 package cat.trombo.alertatrombo.domain
 
-class Hobby {
+data class Hobby(val id: Int,
+            val name: String,
+            val sedentarism: Int,
+            val healthy: Int,
+            val harmful: Boolean) {
+
+
 
 }

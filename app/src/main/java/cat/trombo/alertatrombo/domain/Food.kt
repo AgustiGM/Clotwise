@@ -1,11 +1,11 @@
 package cat.trombo.alertatrombo.domain
 
-class Food (val calories: Int): Consumable  {
+data class Food (val calories:Int,
+            val carbohydrates: Int,
+            val sugar: Int,
+            val vitanims: Int,
+            val proteins: Int,
+            val fat: Int)  {
 
-    var carbohydrates: Int? = null
-
-    override fun consume() {
-        TODO("Not yet implemented")
-    }
 
 }

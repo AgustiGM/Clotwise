@@ -12,6 +12,8 @@ class Person(val name: String,
 
     var job: Job? = null
 
+    var conditions: List<Condition>? = null
+
     var hobbies: List<Hobby>? = null
 
     var glucose: Double? = null
@@ -27,11 +29,6 @@ class Person(val name: String,
     var hunger: Int = 0
 
     var waterIntake: Int = 0
-
-    fun consume(consumable: Consumable) : Int {
-        consumable.consume()
-        return 1
-    }
 
 
 }
