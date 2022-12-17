@@ -37,7 +37,6 @@ object MainScreenVM : ViewModel() {
 //    val hobbyList: List<Hobby> = JsonObjectRepo.loadHobbies(context)
 //    val conditionList: List<Condition> = JsonObjectRepo.loadConditions(context)
 
-    val currentUser : Person? = null
 
     var cevent : LifeEvent? = null
 
@@ -76,9 +75,10 @@ object MainScreenVM : ViewModel() {
 
     }
 
-    private
+
 
     var currentUser : Person? = null
+
 
 
     fun setPerson (name: String, gender: Gender, age: Int, height: Double, weight: Double/*, job: Job*/ ){

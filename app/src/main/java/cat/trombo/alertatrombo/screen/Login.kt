@@ -30,7 +30,7 @@ import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 
 @Composable
 fun LoginPage(navController: NavHostController) {
-    val viewModel = MainScreenVM(LocalContext.current)
+    val viewModel = MainScreenVM
     Column(
         modifier = Modifier.padding(20.dp),
         verticalArrangement = Arrangement.Center,
