@@ -93,7 +93,6 @@ object MainScreenVM : ViewModel() {
         this.currentUser?.age  =  age
         this.currentUser?.height = height
         this.currentUser?.weight = weight
-       // this.currentUser?.job = job
 
         println(this.currentUser?.age)
         println(this.currentUser?.weight)
