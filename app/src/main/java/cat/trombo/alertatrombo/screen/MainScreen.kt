@@ -6,12 +6,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+
+import androidx.compose.ui.window.Popup
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
 import cat.trombo.alertatrombo.domain.Person
@@ -28,11 +33,20 @@ fun MainScreen(navController: NavHostController) {
 
     val viewModel = MainScreenVM
     val p: Person = viewModel.getPerson(LocalContext.current)
+
 //    val e : LifeEvent? = viewModel.currentEvent
     val uiState by viewModel.uiState.collectAsState()
 
     var event : LifeEvent? = viewModel.cevent
     //println(state.value.person.height)
+
+
+    var pop by remember {mutableStateOf(false)}
+    var o1 = ""
+    var o2 = ""
+
+
+    println(p.height)
 
     Box {
         Image(
@@ -52,16 +66,20 @@ fun MainScreen(navController: NavHostController) {
                     .padding(8.dp)
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(color = Color.Red.copy(alpha = 0.5f))
-                    .height(100.dp)/*, backgroundColor = Color.Red*/
+                    .background(color = LightBackground2.copy(alpha = 0.75f))
+                    .height(200.dp)
+                    /*, backgroundColor = Color.Red*/
             ) {
-                Text("Top box"/*, style = TextStyle(color = Color.White, textAlign = TextAlign.Center)*/)
+                CustomProgressBar()
             }
+
+            Button(onClick = {pop = true;}){Text("click")}
 
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(20.dp))
                     .padding(8.dp)
+                    .fillMaxWidth()
                     .background(color = Color.Green)
                     .height(100.dp)
             ) {
@@ -75,10 +93,34 @@ fun MainScreen(navController: NavHostController) {
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .height(250.dp)
-                .background(color = Background)) {
+
+                .background(color = LightBackground)) {
+
             //TabOnlyTitle()
             //CustomTabs()
             tabs(p)
+            }
+        }
+        if(pop){
+            Popup(
+                alignment = Alignment.CenterStart,
+
+                ) {
+                Box(modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+                    .clip(shape)
+                    .background(color = Color.White)
+                    .height(200.dp)){
+                    Row() {
+                        Button(onClick = { o1 = "1"; pop = false }) {
+                            Text("option 1")
+                        }
+                        Button(onClick = { o2 = "2"; pop = false }) {
+                            Text("option 2")
+                        }
+                    }
+                }
             }
         }
     }
@@ -94,7 +136,7 @@ fun tabs(p:Person) {
             tabTitles.forEachIndexed { index, title ->
                 Tab(selected = tabIndex == index, // 4.
                     onClick = { tabIndex = index },
-                     modifier = Modifier.background(color = DarkBackground),
+                     modifier = Modifier.background(color = LightBackground2),
                     text = { Text(text = title) }) // 5.
             }
         }
