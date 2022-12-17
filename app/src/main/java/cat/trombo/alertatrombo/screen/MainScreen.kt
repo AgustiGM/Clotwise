@@ -10,11 +10,14 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.ui.window.Popup
@@ -28,26 +31,27 @@ import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 import cat.trombo.alertatrombo.ui.theme.*
 
 
-
 //@Preview()
 @Composable
 fun MainScreen(navController: NavHostController) {
     val shape = RoundedCornerShape(12.dp)
 
     val viewModel = MainScreenVM
-    val p: Person = viewModel.getPerson(LocalContext.current)
+    val p: Person? = viewModel.currentUser
 
 //    val e : LifeEvent? = viewModel.currentEvent
     val uiState by viewModel.uiState.collectAsState()
 
+    var event: LifeEvent? = viewModel.cevent
     //println(state.value.person.height)
+
 
     Box {
         Image(
-                painter = painterResource(id = R.drawable.backgroundphotofield),
-                contentDescription = null,
+            painter = painterResource(id = R.drawable.backgroundphotofield),
+            contentDescription = null,
 //            modifier = Modifier.fillMaxHeight()
-            )
+        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -60,50 +64,48 @@ fun MainScreen(navController: NavHostController) {
                     .padding(8.dp)
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(color = LightBackground2.copy(alpha = 0.75f))
-                    .height(200.dp)
-                    /*, backgroundColor = Color.Red*/
+                    .background(color = Color.Red.copy(alpha = 0.5f))
+                    .height(100.dp)/*, backgroundColor = Color.Red*/
             ) {
                 CustomProgressBar()
             }
-
 
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(20.dp))
                     .padding(8.dp)
-                    .fillMaxWidth()
                     .background(color = Color.Green)
                     .height(100.dp)
+            )
+//             Bottom box with tabs
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .background(color = Background)
             ) {
-                Box() {
-                    if (uiState.currentEvent != null)
-                        pop(uiState.currentEvent)
-
+                //TabOnlyTitle()
+                //CustomTabs()
+                if (p != null) {
+                    tabs(p)
                 }
             }
-//             Bottom box with tabs
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
 
-                .background(color = LightBackground)) {
-
-            //TabOnlyTitle()
-            //CustomTabs()
-            tabs(p)
-            }
         }
-        if (uiState.currentEvent != null ){
+
+
+        if (uiState.currentEvent != null) {
             Popup(
                 alignment = Alignment.Center,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth()
+                        .clip(shape)
+                        .background(color = Color.White)
+                        .height(200.dp), contentAlignment = Alignment.Center
                 ) {
-                Box(modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
-                    .clip(shape)
-                    .background(color = Color.White)
-                    .height(200.dp), contentAlignment = Alignment.Center){
                     Column() {
                         uiState.currentEvent?.title?.let {
                             Text(
@@ -116,10 +118,10 @@ fun MainScreen(navController: NavHostController) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            Button(onClick = {viewModel.ReturnEventState(1)}) {
+                            Button(onClick = { viewModel.ReturnEventState(1) }) {
                                 Text("option 1")
                             }
-                            Button(onClick = {viewModel.ReturnEventState(2)}) {
+                            Button(onClick = { viewModel.ReturnEventState(2) }) {
                                 Text("option 2")
                             }
                         }
@@ -139,11 +141,12 @@ fun MainScreen(navController: NavHostController) {
 //
 //                        }
                     }
-                    }
                 }
             }
         }
     }
+}
+
 
 
 //@Preview()
@@ -156,7 +159,7 @@ fun tabs(p:Person) {
             tabTitles.forEachIndexed { index, title ->
                 Tab(selected = tabIndex == index, // 4.
                     onClick = { tabIndex = index },
-                     modifier = Modifier.background(color = LightBackground2),
+                     modifier = Modifier.background(color = DarkBackground),
                     text = { Text(text = title) }) // 5.
             }
         }
@@ -191,8 +194,7 @@ fun tabs(p:Person) {
                 .padding(6.dp)
                 .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
                 Column(modifier = Modifier
-                    .padding(15.dp)
-                    .fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
+                    .padding(15.dp).fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
                     Text("Nom: "+p.name)
                     Text("Edat: "+p.age)
                     Text("Gènere: "+p.gender)
@@ -210,12 +212,5 @@ fun tabs(p:Person) {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun pop(e:LifeEvent?) {
-    Box() {
-        Text(e!!.title)
     }
 }
