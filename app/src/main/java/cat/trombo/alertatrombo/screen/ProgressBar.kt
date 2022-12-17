@@ -18,6 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cat.trombo.alertatrombo.ui.theme.Purple200
 import cat.trombo.alertatrombo.ui.theme.Purple700
+import cat.trombo.alertatrombo.ui.theme.*
+
 
 @Preview
 @Composable
@@ -57,7 +59,7 @@ fun CustomProgressBar() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 100.dp, start = 30.dp, end = 30.dp)
+            .padding(top = 5.dp, start = 5.dp, end = 5.dp)
     ) {
         // for the text above the progressBar
         Row(
@@ -116,7 +118,7 @@ fun CustomProgressBar() {
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(9.dp))
-                    .background(Purple200)
+                    .background(Background)
             )
             // for the progress of the ProgressBar
             Box(
@@ -124,7 +126,7 @@ fun CustomProgressBar() {
                     .fillMaxWidth(size)
                     .fillMaxHeight()
                     .clip(RoundedCornerShape(9.dp))
-                    .background(Purple700)
+                    .background(DarkBackground)
                     .animateContentSize()
             )
         }
@@ -137,7 +139,7 @@ fun CustomProgressBar() {
             // decrease button
             OutlinedButton(onClick = {
                 if (progressCount > 0) {
-                    progressCount -= 2
+                    progressCount -= 10
                 } else {
                     Toast.makeText(context, "You cannot decrease any more", Toast.LENGTH_SHORT)
                         .show()
@@ -147,8 +149,8 @@ fun CustomProgressBar() {
             }
             // increase Button
             Button(onClick = {
-                if (progressCount < 10) {
-                    progressCount += 2
+                if (progressCount < 100) {
+                    progressCount += 10
                 } else {
                     Toast.makeText(context, "You cannot increase more", Toast.LENGTH_SHORT).show()
                 }
