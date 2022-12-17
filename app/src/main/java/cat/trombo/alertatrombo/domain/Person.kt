@@ -4,7 +4,6 @@ class Person(val name: String,
                 val gender: Gender) {
 
     var age: Int = 0
-        private set
 
     var height: Double = 0.0
 
