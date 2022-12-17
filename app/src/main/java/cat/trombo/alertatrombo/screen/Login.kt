@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.*
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -22,11 +23,14 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
 import cat.trombo.alertatrombo.Routes
+import cat.trombo.alertatrombo.domain.Gender
 import cat.trombo.alertatrombo.ui.theme.Background
 import cat.trombo.alertatrombo.ui.theme.Purple700
+import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 
 @Composable
 fun LoginPage(navController: NavHostController) {
+    val viewModel = MainScreenVM(LocalContext.current)
     Column(
         modifier = Modifier.padding(20.dp),
         verticalArrangement = Arrangement.Center,
@@ -68,7 +72,10 @@ fun LoginPage(navController: NavHostController) {
         Spacer(modifier = Modifier.height(20.dp))
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
-                onClick = { navController.navigate(Routes.MainScreen.route) },
+                onClick = {
+                    val gender : Gender = Gender.Male
+                    viewModel.setPerson(name.value.text, gender, edat.value.text.toInt(), alcada.value.text.toDouble(), pes.value.text.toDouble())
+                    navController.navigate(Routes.MainScreen.route) },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
                     .fillMaxWidth()
