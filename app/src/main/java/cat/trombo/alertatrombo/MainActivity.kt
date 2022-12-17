@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import cat.trombo.alertatrombo.ui.theme.AlertaTromboTheme
 import androidx.compose.material.*
 import cat.trombo.alertatrombo.screen.MainScreen
+import cat.trombo.alertatrombo.screen.ScreenMain
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
