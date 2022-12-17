@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import cat.trombo.alertatrombo.R
 
 
 //@Preview()
@@ -24,28 +25,41 @@ import androidx.navigation.NavHostController
 fun MainScreen(navController: NavHostController) {
     val shape = RoundedCornerShape(12.dp)
     Box {
-        /*Image(
+        Image(
                 painter = painterResource(id = R.drawable.backgroundphotofield),
                 contentDescription = null,
 //            modifier = Modifier.fillMaxHeight()
-            )*/
+            )
         Column(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             // Top box with width-fitted content
             Box(
-                modifier = Modifier.padding(8.dp).fillMaxWidth().clip(shape).background(color = Color.Red.copy(alpha = 0.5f))
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+                    .clip(shape)
+                    .background(color = Color.Red.copy(alpha = 0.5f))
                     .height(100.dp)/*, backgroundColor = Color.Red*/
             ) {
                 Text("Top box"/*, style = TextStyle(color = Color.White, textAlign = TextAlign.Center)*/)
             }
 
             Box(
-                modifier = Modifier.clip(RoundedCornerShape(20.dp)).padding(8.dp).background(color = Color.Green).height(100.dp)
+                modifier = Modifier
+                    .clip(RoundedCornerShape(20.dp))
+                    .padding(8.dp)
+                    .background(color = Color.Green)
+                    .height(100.dp)
             )
 //             Bottom box with tabs
-            Box(modifier = Modifier.fillMaxWidth().height(250.dp).background(color = Color.Blue)) {
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp)
+                .background(color = Color.Blue)) {
             //TabOnlyTitle()
             //CustomTabs()
             tabs()
@@ -54,10 +68,11 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
+@Preview()
 @Composable
 fun tabs() {
     var tabIndex by remember { mutableStateOf(0) } // 1.
-    val tabTitles = listOf("Menjar", "Feina", "Oci", "Informació")
+    val tabTitles = listOf("Menjar", "Feina", "Oci", "Info")
     Column { // 2.
         TabRow(selectedTabIndex = tabIndex) { // 3.
             tabTitles.forEachIndexed { index, title ->
@@ -67,8 +82,30 @@ fun tabs() {
             }
         }
         when (tabIndex) { // 6.
-            0 -> Text("Hello content")
-            1 -> Text("There content")
+            0 -> Box(modifier = Modifier.padding(6.dp)){
+                Text("Hola\nHola\nHola")
+            }//Text("Hello content")
+            1 -> Row( modifier = Modifier.padding(6.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
+                Column(){
+                    Text("Hola")
+                    Text("Hola")
+                    Text("Hola")
+                    Text("Hola")
+                    Text("Hola")
+                    Text("Hola")
+                    Text("Hola")
+                }
+                Column(){
+                    Text("Adeu")
+                    Text("Adeu")
+                    Text("Adeu")
+                    Text("Adeu")
+                    Text("Adeu")
+                    Text("Adeu")
+                    Text("Adeu")
+                }
+            }
+                //Text("There content")
             2 -> Text("World content")
             3 -> Text("pagina 4")
         }
