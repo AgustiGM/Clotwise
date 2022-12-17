@@ -1,5 +1,6 @@
 package cat.trombo.alertatrombo.events
 
+import java.lang.Thread.sleep
 import java.util.*
 
 object EventManager {
@@ -8,6 +9,7 @@ object EventManager {
 
 
     fun getEvent() : LifeEvent? {
+        sleep(3000)
         return eventQueue.poll()
     }
 
