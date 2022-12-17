@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import cat.trombo.alertatrombo.screen.ScreenMain
 import cat.trombo.alertatrombo.ui.theme.AlertaTromboTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,22 +20,17 @@ class MainActivity : ComponentActivity() {
             AlertaTromboTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    ScreenMain()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Holis $name!")
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     AlertaTromboTheme {
-        Greeting("Agustí")
+        ScreenMain()
     }
 }
