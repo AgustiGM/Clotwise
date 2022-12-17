@@ -4,9 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -40,16 +42,16 @@ fun MainScreen(navController: NavHostController) {
 //    val e : LifeEvent? = viewModel.currentEvent
     val uiState by viewModel.uiState.collectAsState()
 
-    var event : LifeEvent? = viewModel.cevent
+    var event: LifeEvent? = viewModel.cevent
     //println(state.value.person.height)
 
 
     Box {
         Image(
-                painter = painterResource(id = R.drawable.backgroundphotofield),
-                contentDescription = null,
+            painter = painterResource(id = R.drawable.backgroundphotofield),
+            contentDescription = null,
 //            modifier = Modifier.fillMaxHeight()
-            )
+        )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,7 +67,7 @@ fun MainScreen(navController: NavHostController) {
                     .background(color = Color.Red.copy(alpha = 0.5f))
                     .height(100.dp)/*, backgroundColor = Color.Red*/
             ) {
-                Text("Top box"/*, style = TextStyle(color = Color.White, textAlign = TextAlign.Center)*/)
+                CustomProgressBar()
             }
 
             Box(
@@ -76,19 +78,76 @@ fun MainScreen(navController: NavHostController) {
                     .height(100.dp)
             )
 //             Bottom box with tabs
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .background(color = Background )) {
-            //TabOnlyTitle()
-            //CustomTabs()
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .background(color = Background)
+            ) {
+                //TabOnlyTitle()
+                //CustomTabs()
                 if (p != null) {
                     tabs(p)
+                }
+            }
+
+        }
+
+
+        if (uiState.currentEvent != null) {
+            Popup(
+                alignment = Alignment.Center,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth()
+                        .clip(shape)
+                        .background(color = Color.White)
+                        .height(200.dp), contentAlignment = Alignment.Center
+                ) {
+                    Column() {
+                        uiState.currentEvent?.title?.let {
+                            Text(
+                                uiState.currentEvent!!.title,
+                                color = DarkText,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Button(onClick = { viewModel.ReturnEventState(1) }) {
+                                Text("option 1")
+                            }
+                            Button(onClick = { viewModel.ReturnEventState(2) }) {
+                                Text("option 2")
+                            }
+                        }
+//                        uiState.currentEvent?.options.let {
+//                            LazyRow(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                horizontalArrangement = Arrangement.Center
+//                            ) {
+////                            items(uiState.currentEvent!!.options.size){
+////                                uiState.currentEvent!!.options.forEach{
+//                                itemsIndexed(uiState.currentEvent!!.options) { index, item ->
+//                                    Button(onClick = { viewModel.ReturnEventState(index) }) {
+//                                        Text("option " + index)
+//                                    }
+//                                }
+//                            }
+//
+//                        }
+                    }
                 }
             }
         }
     }
 }
+
+
 
 //@Preview()
 @Composable
