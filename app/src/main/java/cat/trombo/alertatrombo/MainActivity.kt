@@ -3,17 +3,14 @@ package cat.trombo.alertatrombo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import cat.trombo.alertatrombo.domain.Person
-import cat.trombo.alertatrombo.repo.JsonPersonDataRepo
+import cat.trombo.alertatrombo.screen.ScreenMain
 import cat.trombo.alertatrombo.ui.theme.AlertaTromboTheme
+import androidx.compose.material.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,30 +19,17 @@ class MainActivity : ComponentActivity() {
             AlertaTromboTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    Button(
-                        onClick = {
-                            var repo = JsonPersonDataRepo()
-                            var a : Person? = repo.loadData(this.applicationContext,"agusti.json")
-                            println(a?.name)
-
-                        }
-                    ) { Text(text = "loaddata")}
-
+                    ScreenMain()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Holis $name!")
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     AlertaTromboTheme {
-        Greeting("Agustí")
+        ScreenMain()
     }
 }
