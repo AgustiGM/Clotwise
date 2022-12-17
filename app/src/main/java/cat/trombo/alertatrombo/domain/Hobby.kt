@@ -4,7 +4,8 @@ data class Hobby(val id: Int,
             val name: String,
             val sedentarism: Int,
             val healthy: Int,
-            val harmful: Boolean) {
+            val hunger: Int,
+            val water: Int) {
 
 
 
