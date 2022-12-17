@@ -3,6 +3,7 @@ package cat.trombo.alertatrombo.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -12,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.ui.window.Popup
@@ -37,16 +39,11 @@ fun MainScreen(navController: NavHostController) {
 //    val e : LifeEvent? = viewModel.currentEvent
     val uiState by viewModel.uiState.collectAsState()
 
-    var event : LifeEvent? = viewModel.cevent
     //println(state.value.person.height)
 
 
-    var pop by remember {mutableStateOf(false)}
     var o1 = ""
     var o2 = ""
-
-
-    println(p.height)
 
     Box {
         Image(
@@ -73,7 +70,6 @@ fun MainScreen(navController: NavHostController) {
                 CustomProgressBar()
             }
 
-            Button(onClick = {pop = true;}){Text("click")}
 
             Box(
                 modifier = Modifier
@@ -101,24 +97,36 @@ fun MainScreen(navController: NavHostController) {
             tabs(p)
             }
         }
-        if(pop){
+        if (uiState.currentEvent != null ){
             Popup(
-                alignment = Alignment.CenterStart,
-
+                alignment = Alignment.Center,
                 ) {
                 Box(modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth()
                     .clip(shape)
                     .background(color = Color.White)
-                    .height(200.dp)){
-                    Row() {
-                        Button(onClick = { o1 = "1"; pop = false }) {
-                            Text("option 1")
+                    .height(200.dp), contentAlignment = Alignment.Center){
+                    Column() {
+                        uiState.currentEvent?.title?.let{Text(uiState.currentEvent!!.title, color = DarkText, fontWeight = FontWeight.Bold)}
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Button(onClick = {viewModel.ReturnEventState(1)}) {
+                                Text("option 1")
+                            }
+                            Button(onClick = {viewModel.ReturnEventState(2)}) {
+                                Text("option 2")
+                            }
                         }
-                        Button(onClick = { o2 = "2"; pop = false }) {
-                            Text("option 2")
-                        }
+//                        LazyRow(
+//                            modifier = Modifier.fillMaxWidth(),
+//                            horizontalArrangement = Arrangement.Center){
+//                            items(uiState.currentEvent!!.options.size){
+//                                uiState.currentEvent!!.options.forEach()
+//                            }
+//                        }
                     }
                 }
             }

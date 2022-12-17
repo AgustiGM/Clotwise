@@ -37,7 +37,7 @@ object MainScreenVM : ViewModel() {
 //    val hobbyList: List<Hobby> = JsonObjectRepo.loadHobbies(context)
 //    val conditionList: List<Condition> = JsonObjectRepo.loadConditions(context)
 
-    val currentUser : Person? = null
+    //val currentUser : Person? = null
 
     var cevent : LifeEvent? = null
 
@@ -54,9 +54,14 @@ object MainScreenVM : ViewModel() {
         EventManager.addEvent(e2)
     }
 
+    fun ReturnEventState(option: Int){
+        updateState(null);
+        run();
+    }
+
     private fun run() {
         viewModelScope.launch {
-        while (EventManager.eventQueue.size >= 1) {
+        if (EventManager.eventQueue.size >= 1) {
 
             delay(abs(Random(54).nextLong()%8000))
             cevent = null
