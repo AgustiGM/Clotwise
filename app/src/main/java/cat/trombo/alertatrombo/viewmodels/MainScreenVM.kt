@@ -1,8 +1,6 @@
 package cat.trombo.alertatrombo.viewmodels
 
 import android.content.Context
-import androidx.core.content.ContentProviderCompat.requireContext
-import cat.trombo.alertatrombo.MainScreen
 import cat.trombo.alertatrombo.domain.*
 import cat.trombo.alertatrombo.repo.JsonObjectRepo
 
