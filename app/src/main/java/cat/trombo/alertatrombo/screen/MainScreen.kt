@@ -65,7 +65,7 @@ fun MainScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .clip(shape)
                     .background(color = Color.Red.copy(alpha = 0.5f))
-                    .height(100.dp)/*, backgroundColor = Color.Red*/
+                    .height(150.dp)/*, backgroundColor = Color.Red*/
             ) {
                 CustomProgressBar()
             }
