@@ -1,32 +1,29 @@
-import android.os.Bundle
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.*
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
 import cat.trombo.alertatrombo.Routes
 import cat.trombo.alertatrombo.domain.Gender
 import cat.trombo.alertatrombo.ui.theme.Background
-import cat.trombo.alertatrombo.ui.theme.Purple700
 import cat.trombo.alertatrombo.viewmodels.MainScreenVM
+import kotlin.math.exp
+
 
 @Composable
 fun LoginPage(navController: NavHostController) {
@@ -40,6 +37,9 @@ fun LoginPage(navController: NavHostController) {
         val edat = remember { mutableStateOf(TextFieldValue()) }
         val alcada = remember { mutableStateOf(TextFieldValue()) }
         val pes = remember { mutableStateOf(TextFieldValue()) }
+        val sexe = remember { mutableStateOf("") }
+        var expanded = remember { mutableStateOf(false) }
+//        var mTextFieldSize by remember { mutableStateOf(Size.Zero)}
 
         Text(text = "Insereix les teves dades",
             color = Background,
@@ -69,12 +69,40 @@ fun LoginPage(navController: NavHostController) {
             value = pes.value,
             onValueChange = { pes.value = it })
 
+
+        Spacer(modifier = Modifier.height(20.dp))
+        OutlinedTextField(
+            value = sexe.value,
+            onValueChange = { sexe.value = it },
+
+            label = {Text("Label")},
+            trailingIcon = {
+                Button(onClick = { expanded.value = !expanded.value }) {
+                    Text("desplega")
+                }
+            }
+        )
+
+        DropdownMenu(
+           expanded = expanded.value,
+            onDismissRequest = {expanded.value = !expanded.value}
+        ) {
+            Gender.values().forEach { label ->
+                DropdownMenuItem(onClick = {
+                    sexe.value = label.name
+                    expanded.value=false
+                }) {
+                    Text(text = label.name)
+                }
+            }
+        }
+
         Spacer(modifier = Modifier.height(20.dp))
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
                 onClick = {
-                    val gender : Gender = Gender.Male
-                    viewModel.setPerson(name.value.text, gender, edat.value.text.toInt(), alcada.value.text.toDouble(), pes.value.text.toDouble())
+//                    val gender : Gender = Gender.Male
+                    viewModel.setPerson(name.value.text, Gender.valueOf(sexe.value), edat.value.text.toInt(), alcada.value.text.toDouble(), pes.value.text.toDouble())
                     navController.navigate(Routes.MainScreen.route) },
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
@@ -85,4 +113,9 @@ fun LoginPage(navController: NavHostController) {
             }
         }
     }
+}
+
+@Composable
+fun DropDown(list: List<String>) {
+
 }
