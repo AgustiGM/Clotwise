@@ -91,7 +91,43 @@ fun CustomProgressBar() {
                     .animateContentSize()
             )
         }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 30.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){}
+        Row(
+            modifier = Modifier
+                .widthIn(min = 90.dp)
+                .fillMaxWidth(size),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Text(text = "RISC: $progress")
+        }
 
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(17.dp)
+        ) {
+            // for the background of the ProgressBar
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(9.dp))
+                    .background(Purple200)
+            )
+            // for the progress of the ProgressBar
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(size)
+                    .fillMaxHeight()
+                    .clip(RoundedCornerShape(9.dp))
+                    .background(Purple700)
+                    .animateContentSize()
+            )
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
