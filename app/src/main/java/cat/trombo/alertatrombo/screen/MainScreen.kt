@@ -94,7 +94,7 @@ fun MainScreen(navController: NavHostController) {
         }
 
 
-        if (uiState.currentEvent != null) {
+        if (uiState.launched) {
             Popup(
                 alignment = Alignment.Center,
             ) {
@@ -127,13 +127,13 @@ fun MainScreen(navController: NavHostController) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Button(onClick = { viewModel.ReturnEventState(1) }) {
+                            Button(onClick = { viewModel.returnEventState(0) }) {
                                 Text(uiState.currentEvent!!.options[0])
                             }
                             
                             if(uiState.currentEvent!!.options.size > 1) {
                                 Spacer(modifier = Modifier)
-                                Button(onClick = { viewModel.ReturnEventState(2) }) {
+                                Button(onClick = { viewModel.returnEventState(1) }) {
                                     Text(uiState.currentEvent!!.options[1])
                                 }
                             }
