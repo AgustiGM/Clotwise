@@ -185,7 +185,7 @@ fun MainScreen(navController: NavHostController) {
                             .padding(8.dp)
                             .fillMaxWidth()
                             .clip(shape)
-                            .background(color = Color.Red)
+                            .background(color = Background)
                             .height(250.dp), contentAlignment = Alignment.Center
                     ) {
                         Column(
@@ -210,7 +210,8 @@ fun MainScreen(navController: NavHostController) {
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    Button(onClick = { viewModel.returnEventState(0) }) {
+                                    Button(onClick = { viewModel.returnEventState(0) }, colors = ButtonDefaults.buttonColors(
+                                        DarkBackground)) {
 
                                         Text(uiState.currentEvent!!.options[0],
                                     color = Color.White)}

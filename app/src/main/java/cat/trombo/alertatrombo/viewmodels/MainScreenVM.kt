@@ -106,7 +106,7 @@ object MainScreenVM : ViewModel() {
         if (currentUser != null) {
             if (i == 1) {
                 currentUser.vitamins += 1
-                currentUser.activityLevel +=42
+                currentUser.activityLevel +=52
             }
             else {
                 currentUser.cholesterol +=16
