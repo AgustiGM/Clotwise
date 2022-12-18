@@ -77,13 +77,13 @@ fun LoginPage(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
-                label = { Text(text = "Alçada") },
+                label = { Text(text = "Alçada (cm)") },
                 value = alcada.value,
                 onValueChange = { alcada.value = it })
 
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
-                label = { Text(text = "Pes") },
+                label = { Text(text = "Pes (kg)") },
                 value = pes.value,
                 onValueChange = { pes.value = it })
 

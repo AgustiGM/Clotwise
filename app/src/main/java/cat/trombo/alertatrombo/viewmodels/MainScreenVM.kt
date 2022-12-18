@@ -147,7 +147,7 @@ object MainScreenVM : ViewModel() {
        var p:Person? = repo.loadData(context, "agusti.json" );
         println(p?.name)
         if(p != null) return p
-        return Person("null", Gender.Other)
+        return Person("null", Gender.Altres)
     }
 
 }
