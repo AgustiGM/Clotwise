@@ -25,8 +25,6 @@ class Person(val name: String,
 
     var activityLevel: Int = 60
 
-    var condition: List<Condition>? = null
-
     var hunger: Int = 0
 
     var waterIntake: Int = 0
