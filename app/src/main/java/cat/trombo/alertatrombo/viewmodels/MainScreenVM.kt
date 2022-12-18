@@ -64,7 +64,7 @@ object MainScreenVM : ViewModel() {
                                 List(2,fun(a: Int): String {
                                     return when(a) {
                                         0 -> "Anar al metge"
-                                        1 -> "Són cruiximents"
+                                        1 -> "No fer res, són cruiximents"
                                         else -> "No fer res"
                                     }
                                 }))
@@ -78,10 +78,18 @@ object MainScreenVM : ViewModel() {
                             else -> "No fer res"
                     }
                 }))
-
+        val e4: LifeEvent = LifeEvent("TROMBOSI !",
+            "Has tingut una trombosi !!",
+            List(1,fun(a: Int): String {
+                return when(a) {
+                    0 -> "ANAR AL METGE !"
+                    else -> "No fer res"
+                }
+            }))
         EventManager.addEvent(e1)
         EventManager.addEvent(e2)
         EventManager.addEvent(e3)
+        EventManager.addEvent(e4)
     }
 
     fun returnEventState(option: Int){
@@ -101,7 +109,7 @@ object MainScreenVM : ViewModel() {
                 currentUser.activityLevel +1
             }
             else {
-                currentUser.cholesterol +=1
+                currentUser.cholesterol +=16
                 currentUser.glucose += 1
                 currentUser.stressLevel += 1
                 currentUser.vitamins = currentUser.vitamins
