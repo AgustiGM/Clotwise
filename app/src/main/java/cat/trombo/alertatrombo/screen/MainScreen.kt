@@ -3,6 +3,7 @@ package cat.trombo.alertatrombo.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -11,18 +12,14 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.ui.window.Popup
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
@@ -81,7 +78,7 @@ fun MainScreen(navController: NavHostController) {
                     .padding(8.dp)
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(color = Color.Red.copy(alpha = 0.5f))
+                    .background(color = LightBackground.copy(alpha = 0.5f))
                     .height(75.dp)/*, backgroundColor = Color.Red*/
             ) {
                 CustomProgressBar()
@@ -99,7 +96,7 @@ fun MainScreen(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(300.dp)
-                    .background(color = Background)
+                    .background(color = LightBackground)
             ) {
                 //TabOnlyTitle()
                 //CustomTabs()
@@ -111,7 +108,7 @@ fun MainScreen(navController: NavHostController) {
         }
 
 
-        if (uiState.currentEvent != null) {
+        if (uiState.launched) {
             Popup(
                 alignment = Alignment.Center,
             ) {
@@ -193,7 +190,7 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
             tabTitles.forEachIndexed { index, title ->
                 Tab(selected = tabIndex == index, // 4.
                     onClick = { tabIndex = index },
-                     modifier = Modifier.background(color = DarkBackground),
+                     modifier = Modifier.background(color = LightBackground2),
                     text = { Text(text = title) }) // 5.
             }
         }
