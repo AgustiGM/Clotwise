@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Còrrer",
+    "sedentarism": 5,
+    "healthy": 70,
+    "hunger": 30,
+    "water": 50
+  },
+
+  {
+    "id": 2,
+    "name": "Jugar al PC",
+    "sedentarism": 70,
+    "healthy": 10,
+    "hunger": 10,
+    "water": 10
+  }
+
+]
