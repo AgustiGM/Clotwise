@@ -42,7 +42,7 @@ fun MainScreen(navController: NavHostController) {
     var f: List<Food>? = null
     var j: List<Job>? = null
     var h: List<Hobby>? = null
-    var contadorEvent by remember { mutableStateOf(0) }
+    var contadorEvent = 0
 
     if(viewModel.foodList != null){
         f = viewModel.foodList
@@ -111,57 +111,120 @@ fun MainScreen(navController: NavHostController) {
 
 
         if (uiState.launched) {
+            ++contadorEvent
             Popup(
                 alignment = Alignment.Center,
             ) {
-                Box(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .clip(shape)
-                        .background(color = Color.White)
-                        .height(200.dp), contentAlignment = Alignment.Center
-                ) {
-                    Column(
+                if(uiState.currentEvent?.title != "TROMBOSI !"){
+                    Box(
                         modifier = Modifier
                             .padding(8.dp)
-                            .fillMaxHeight(),
-                        verticalArrangement = Arrangement.SpaceEvenly
+                            .fillMaxWidth()
+                            .clip(shape)
+                            .background(color = Color.White)
+                            .height(200.dp), contentAlignment = Alignment.Center
                     ) {
-                        uiState.currentEvent?.title?.let {
-                            Text(
-                                uiState.currentEvent!!.title,
-                                color = DarkText,
-                                fontWeight = FontWeight.Bold,
-                                textAlign = TextAlign.Center
-                            )
-                            Text(
-                                uiState.currentEvent!!.description,
-                                color = DarkText,
-                            )
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly
+                        Column(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Button(onClick = { viewModel.returnEventState(0) },
+                            uiState.currentEvent?.title?.let {
+                                Text(
+                                    uiState.currentEvent!!.title,
+                                    color = DarkText,
+                                    fontWeight = FontWeight.Bold,
+                                    textAlign = TextAlign.Center
+                                )
+                                Text(
+                                    uiState.currentEvent!!.description,
+                                    color = DarkText,
+                                )
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceEvenly
+                            ) {
+                                Button(onClick = { viewModel.returnEventState(0) },
                             colors = ButtonDefaults.buttonColors(DarkBackground)) {
 
-                                Text(uiState.currentEvent!!.options[0],
-                                color = Color.White)
-                            }
-                            
-                            if(uiState.currentEvent!!.options.size > 1) {
-                                Spacer(modifier = Modifier)
-                                Button(onClick = { viewModel.returnEventState(1) },
-                                    colors = ButtonDefaults.buttonColors(DarkBackground)) {
+                                    Text(uiState.currentEvent!!.options[0], color = Color.White)
+                                }
 
-                                    Text(uiState.currentEvent!!.options[1],
-                                    color = Color.White)
+                                if(uiState.currentEvent!!.options.size > 1) {
+                                    Spacer(modifier = Modifier)
+                                    Button(onClick = { viewModel.returnEventState(1) }, colors = ButtonDefaults.buttonColors(DarkBackground)) {
+
+                                        Text(uiState.currentEvent!!.options[1], color = Color.White)
+                                    }
                                 }
                             }
+                            }
+    //                        uiState.currentEvent?.let {
+    //                            LazyRow(
+    //                                modifier = Modifier.fillMaxWidth(),
+    //                                horizontalArrangement = Arrangement.Center
+    //                            ) {
+    ////                            items(uiState.currentEvent!!.options.size){
+    ////                                uiState.currentEvent!!.options.forEach{
+    //                                itemsIndexed(uiState.currentEvent!!.options) { index, item ->
+    //                                    Button(onClick = { viewModel.ReturnEventState(index) }) {
+    //                                        Text("option " + index)
+    //                                    }
+    //                                }
+    //                            }
+    //
+    //                        }
                         }
-                        }
+                    }
+                }
+                else{
+                    Box(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                            .clip(shape)
+                            .background(color = Color.Red)
+                            .height(250.dp), contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .fillMaxHeight(),
+                            verticalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            uiState.currentEvent?.title?.let {
+                                Text(
+                                    uiState.currentEvent!!.title,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold,
+                                    textAlign = TextAlign.Center
+                                )
+                                Text(
+                                    uiState.currentEvent!!.description,
+                                    color = Color.White,
+                                )
+
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    Button(onClick = { viewModel.returnEventState(0) }) {
+
+                                        Text(uiState.currentEvent!!.options[0],
+                                    color = Color.White)}
+
+                                    if(uiState.currentEvent!!.options.size > 1) {
+                                        Spacer(modifier = Modifier)
+                                        Button(onClick = { viewModel.returnEventState(1) },
+                                    colors = ButtonDefaults.buttonColors(DarkBackground)) {
+
+                                            Text(uiState.currentEvent!!.options[1],
+                                        color = Color.White)}
+                                    }
+                                }
+                            }
 //                        uiState.currentEvent?.let {
 //                            LazyRow(
 //                                modifier = Modifier.fillMaxWidth(),
@@ -177,6 +240,7 @@ fun MainScreen(navController: NavHostController) {
 //                            }
 //
 //                        }
+                        }
                     }
                 }
             }
@@ -216,7 +280,7 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
                 if(j != null){
                     Column {
                         j.forEach { message ->
-                            Text(message.name+" (level of activity = "+ message.activity+"%)")
+                            Text(message.name+" (Nivell d'activitat = "+ message.activity+"%)")
                         }
                     }
                 }
@@ -226,7 +290,7 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
                 if(h != null){
                     Column {
                         h.forEach { message ->
-                            Text(message.name+" (level of sedentarism = "+ message.sedentarism+"%)")
+                            Text(message.name+" (Nivell de sedentarisme = "+ message.sedentarism+"%)")
                         }
                     }
                 }
@@ -248,9 +312,9 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
                     .padding(15.dp)
                     .fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
                     Text("Gana: "+p.hunger +"/100")
-                    Text("Sed: "+p.waterIntake +"/100")
-                    Text("Glucosa en sang: "+p.glucose +" mg/dl")
-                    Text("Colesterol en sang: " + p.cholesterol +" mg/dl")
+                    Text("Set: "+p.waterIntake +"/100")
+                    Text("Glucosa en sang: "+p.glucose*100 +" mg/dl")
+                    Text("Colesterol en sang: " + p.cholesterol*100 +" mg/dl")
                     Text("Nivells d'estrès: "+p.stressLevel+"0%")
                     Text("Nivells d'activitat : "+p.activityLevel+"%")
 

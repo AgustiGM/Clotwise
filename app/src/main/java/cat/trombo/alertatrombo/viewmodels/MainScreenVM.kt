@@ -58,8 +58,16 @@ object MainScreenVM : ViewModel() {
                                             else -> "No fer res"
                                         }
                                     }))
-
-        val e2: LifeEvent = LifeEvent("Et fa mal la cama",
+        val e2: LifeEvent = LifeEvent("Divendres a la tarda",
+            "Per fi és divendres, què fas per esbargir-te?",
+            List(2,fun(a: Int): String {
+                return when(a) {
+                    0 -> "Sofà i manta"
+                    1 -> "Donar-ho tot al bar"
+                    else -> "No fer res"
+                }
+            }))
+        val e3: LifeEvent = LifeEvent("Et fa mal la cama",
                                 "Fa uns dies que et fa mal la cama, què fas?",
                                 List(2,fun(a: Int): String {
                                     return when(a) {
@@ -69,17 +77,9 @@ object MainScreenVM : ViewModel() {
                                     }
                                 }))
 
-        val e3: LifeEvent = LifeEvent("Divendres a la tarda",
-                "Per fi és divendres, què fas per esbargir-te?",
-                            List(2,fun(a: Int): String {
-                             return when(a) {
-                                 0 -> "Sofà i manta"
-                                 1 -> "Donar-ho tot al bar"
-                            else -> "No fer res"
-                    }
-                }))
+
         val e4: LifeEvent = LifeEvent("TROMBOSI !",
-            "Has tingut una trombosi !!",
+            "Recordes que tenies mal a la cama?? \n Una trombosi és la formació d'un cogul sanguini en un vas sanguini que obstaculitza el flux sanguini. Això pot ser perillós ja que pot portar a una manca de subministrament de sang i oxigen als teixits i òrgans.",
             List(1,fun(a: Int): String {
                 return when(a) {
                     0 -> "ANAR AL METGE !"
@@ -106,7 +106,7 @@ object MainScreenVM : ViewModel() {
         if (currentUser != null) {
             if (i == 1) {
                 currentUser.vitamins += 1
-                currentUser.activityLevel +1
+                currentUser.activityLevel +=42
             }
             else {
                 currentUser.cholesterol +=16
