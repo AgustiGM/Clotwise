@@ -186,7 +186,7 @@ fun CustomProgressBar() {
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(9.dp))
-                    .background(Background)
+                    .background(Color.White)
             )
             // for the progress of the ProgressBar
             Box(
