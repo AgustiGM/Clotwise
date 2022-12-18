@@ -65,7 +65,7 @@ fun MainScreen(navController: NavHostController) {
                     .fillMaxWidth()
                     .clip(shape)
                     .background(color = Color.Red.copy(alpha = 0.5f))
-                    .height(150.dp)/*, backgroundColor = Color.Red*/
+                    .height(75.dp)/*, backgroundColor = Color.Red*/
             ) {
                 CustomProgressBar()
             }
@@ -106,12 +106,17 @@ fun MainScreen(navController: NavHostController) {
                         .background(color = Color.White)
                         .height(200.dp), contentAlignment = Alignment.Center
                 ) {
-                    Column() {
+                    Column(
+                        modifier = Modifier
+                            .padding(8.dp).fillMaxHeight(),
+                        verticalArrangement = Arrangement.SpaceEvenly
+                    ) {
                         uiState.currentEvent?.title?.let {
                             Text(
                                 uiState.currentEvent!!.title,
                                 color = DarkText,
                                 fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center
                             )
                             Text(
                                 uiState.currentEvent!!.description,
@@ -120,12 +125,14 @@ fun MainScreen(navController: NavHostController) {
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
+                            horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             Button(onClick = { viewModel.ReturnEventState(1) }) {
                                 Text(uiState.currentEvent!!.options[0])
                             }
+                            
                             if(uiState.currentEvent!!.options.size > 1) {
+                                Spacer(modifier = Modifier)
                                 Button(onClick = { viewModel.ReturnEventState(2) }) {
                                     Text(uiState.currentEvent!!.options[1])
                                 }

@@ -61,44 +61,44 @@ fun CustomProgressBar() {
             .fillMaxSize()
             .padding(top = 5.dp, start = 5.dp, end = 5.dp)
     ) {
-        // for the text above the progressBar
-        Row(
-            modifier = Modifier
-                .widthIn(min = 90.dp)
-                .fillMaxWidth(size),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Text(text = "VIDA: $progress")
-        }
-        // Progress Bar
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(17.dp)
-        ) {
-            // for the background of the ProgressBar
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(9.dp))
-                    .background(Purple200)
-            )
-            // for the progress of the ProgressBar
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(size)
-                    .fillMaxHeight()
-                    .clip(RoundedCornerShape(9.dp))
-                    .background(Purple700)
-                    .animateContentSize()
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){}
+//        // for the text above the progressBar
+//        Row(
+//            modifier = Modifier
+//                .widthIn(min = 90.dp)
+//                .fillMaxWidth(size),
+//            horizontalArrangement = Arrangement.End
+//        ) {
+//            Text(text = "VIDA: $progress")
+//        }
+//        // Progress Bar
+//        Box(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(17.dp)
+//        ) {
+//            // for the background of the ProgressBar
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .clip(RoundedCornerShape(9.dp))
+//                    .background(Purple200)
+//            )
+//            // for the progress of the ProgressBar
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxWidth(size)
+//                    .fillMaxHeight()
+//                    .clip(RoundedCornerShape(9.dp))
+//                    .background(Purple700)
+//                    .animateContentSize()
+//            )
+//        }
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(top = 30.dp),
+//            horizontalArrangement = Arrangement.SpaceBetween
+//        ){}
         Row(
             modifier = Modifier
                 .widthIn(min = 90.dp)
@@ -130,34 +130,34 @@ fun CustomProgressBar() {
                     .animateContentSize()
             )
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 30.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            // decrease button
-            OutlinedButton(onClick = {
-                if (progressCount > 0) {
-                    progressCount -= 10
-                } else {
-                    Toast.makeText(context, "You cannot decrease any more", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }) {
-                Text(text = "Decrease")
-            }
-            // increase Button
-            Button(onClick = {
-                if (progressCount < 100) {
-                    progressCount += 10
-                } else {
-                    Toast.makeText(context, "You cannot increase more", Toast.LENGTH_SHORT).show()
-                }
-            }) {
-                Text(text = "Increase")
-            }
-        }
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(top = 30.dp),
+//            horizontalArrangement = Arrangement.SpaceBetween
+//        ) {
+//            // decrease button
+//            OutlinedButton(onClick = {
+//                if (progressCount > 0) {
+//                    progressCount -= 10
+//                } else {
+//                    Toast.makeText(context, "You cannot decrease any more", Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//            }) {
+//                Text(text = "Decrease")
+//            }
+//            // increase Button
+//            Button(onClick = {
+//                if (progressCount < 100) {
+//                    progressCount += 10
+//                } else {
+//                    Toast.makeText(context, "You cannot increase more", Toast.LENGTH_SHORT).show()
+//                }
+//            }) {
+//                Text(text = "Increase")
+//            }
+//        }
 
 
     }
