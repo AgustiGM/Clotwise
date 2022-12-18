@@ -15,15 +15,15 @@ class Person(val name: String,
 
     var hobbies: List<Hobby>? = null
 
-    var glucose: Double = 99.0 //diabetes -> posar a 122.0
+    var glucose: Double = 9.9 //diabetes -> posar a 122.0
 
-    var cholesterol: Double = 150.0 // alto -> 210.0
+    var cholesterol: Double = 15.0 // alto -> 210.0
 
     var vitamins: Double = 40.0
 
     var stressLevel: Int = 5
 
-    var activityLevel: Int = 60
+    var activityLevel: Int = 70
 
     var hunger: Int = 0
 
