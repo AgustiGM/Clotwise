@@ -106,8 +106,8 @@ object MainScreenVM : ViewModel() {
     private fun run() {
         viewModelScope.launch {
         if (EventManager.eventQueue.size >= 1) {
-
-            delay(abs(Random(54).nextLong()%8000))
+            val del = abs(Random(54).nextLong()%10000) + 6000
+            delay(del)
             cevent = EventManager.getEvent()
             updateState(cevent, true, currentUser!!.vitamins)
             }
