@@ -111,21 +111,28 @@ fun MainScreen(navController: NavHostController) {
                             Text(
                                 uiState.currentEvent!!.title,
                                 color = DarkText,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
                             )
-                        }
+                            Text(
+                                uiState.currentEvent!!.description,
+                                color = DarkText,
+                            )
+
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
                         ) {
                             Button(onClick = { viewModel.ReturnEventState(1) }) {
-                                Text("option 1")
+                                Text(uiState.currentEvent!!.options[0])
                             }
-                            Button(onClick = { viewModel.ReturnEventState(2) }) {
-                                Text("option 2")
+                            if(uiState.currentEvent!!.options.size > 1) {
+                                Button(onClick = { viewModel.ReturnEventState(2) }) {
+                                    Text(uiState.currentEvent!!.options[1])
+                                }
                             }
                         }
-//                        uiState.currentEvent?.options.let {
+                        }
+//                        uiState.currentEvent?.let {
 //                            LazyRow(
 //                                modifier = Modifier.fillMaxWidth(),
 //                                horizontalArrangement = Arrangement.Center
@@ -194,7 +201,8 @@ fun tabs(p:Person) {
                 .padding(6.dp)
                 .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
                 Column(modifier = Modifier
-                    .padding(15.dp).fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
+                    .padding(15.dp)
+                    .fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
                     Text("Nom: "+p.name)
                     Text("Edat: "+p.age)
                     Text("Gènere: "+p.gender)
