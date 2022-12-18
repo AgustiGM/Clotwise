@@ -39,9 +39,7 @@ fun CustomProgressBar() {
 
     val uiState by viewModel.uiState.collectAsState()
     val p: Person = viewModel.currentUser!!
-    val vit by remember {
-        mutableStateOf(uiState.vit)
-    }
+
 
     //var vida = vitamins +activityLevel - hunger- waterintake-glucose-cholesterol-stressLevel
     //var risc = hunger + waterintake + stressLevel + cholesterol + glucose -vitamins - activityLevel
