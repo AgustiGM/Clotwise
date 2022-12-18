@@ -13,7 +13,7 @@ object JsonObjectRepo: GenericObjectRepo{
     private val gson : Gson = Gson()
 
     override fun loadJobs(context: Context): List<Job> {
-        val jsonString = DataRetriever.loadData(context,"jobs.json")
+        val jsonString = DataRetriever.loadData(context,"job.json")
         val type = object : TypeToken<List<Job>>() {}.type
         return gson.fromJson(jsonString, type)
     }
@@ -25,13 +25,13 @@ object JsonObjectRepo: GenericObjectRepo{
     }
 
     override fun loadFoods(context: Context): List<Food> {
-        val jsonString = DataRetriever.loadData(context,"foods.json")
+        val jsonString = DataRetriever.loadData(context,"food.json")
         val type = object : TypeToken<List<Food>>() {}.type
         return gson.fromJson(jsonString, type)
     }
 
     override fun loadHobbies(context: Context): List<Hobby> {
-        val jsonString = DataRetriever.loadData(context,"hobbies.json")
+        val jsonString = DataRetriever.loadData(context,"hobby.json")
         val type = object : TypeToken<List<Hobby>>() {}.type
         return gson.fromJson(jsonString, type)
     }

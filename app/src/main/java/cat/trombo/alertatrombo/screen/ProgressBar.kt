@@ -56,29 +56,32 @@ fun CustomProgressBar() {
      and it can sometimes cause problems like it shows 0.4 to 0.400004 so, here I have use
      progressCount and we will increase and decrease it and then convert it to progress(Float)
      and then use that progress with our ProgressBar Width*/
-    when (progressCount2) {
-        0 -> progress2 = 0.0f
-        5 -> progress2 = 0.05f
-        10 -> progress2 = 0.1f
-        15 -> progress2 = 0.15f
-        20 -> progress2 = 0.2f
-        25 -> progress2 = 0.25f
-        30 -> progress2 = 0.3f
-        35 -> progress2 = 0.35f
-        40 -> progress2 = 0.4f
-        45 -> progress2 = 0.45f
-        50 -> progress2 = 0.5f
-        55 -> progress2 = 0.55f
-        60 -> progress2 = 0.6f
-        65 -> progress2 = 0.65f
-        70 -> progress2 = 0.7f
-        75 -> progress2 = 0.75f
-        80 -> progress2 = 0.8f
-        85 -> progress2 = 0.85f
-        90 -> progress2 = 0.9f
-        95 -> progress2 = 0.95f
-        100 -> progress2 = 1.0f
-    }
+//    when (progressCount2) {
+//
+//        0 -> progress2 = 0.0f
+//        5 -> progress2 = 0.05f
+//        10 -> progress2 = 0.1f
+//        15 -> progress2 = 0.15f
+//        20 -> progress2 = 0.2f
+//        25 -> progress2 = 0.25f
+//        30 -> progress2 = 0.3f
+//        35 -> progress2 = 0.35f
+//        40 -> progress2 = 0.4f
+//        45 -> progress2 = 0.45f
+//        50 -> progress2 = 0.5f
+//        55 -> progress2 = 0.55f
+//        60 -> progress2 = 0.6f
+//        65 -> progress2 = 0.65f
+//        70 -> progress2 = 0.7f
+//        75 -> progress2 = 0.75f
+//        80 -> progress2 = 0.8f
+//        85 -> progress2 = 0.85f
+//        90 -> progress2 = 0.9f
+//        95 -> progress2 = 0.95f
+//        100 -> progress2 = 1.0f
+//    }
+    progress2 = progressCount2 / 100f
+
     when (progressCount) {
         0 -> progress = 0.0f
         5 -> progress = 0.05f
