@@ -72,7 +72,7 @@ object MainScreenVM : ViewModel() {
                                 List(2,fun(a: Int): String {
                                     return when(a) {
                                         0 -> "Anar al metge"
-                                        1 -> "No fer res, són cruiximents"
+                                        1 -> "No fer res"
                                         else -> "No fer res"
                                     }
                                 }))
