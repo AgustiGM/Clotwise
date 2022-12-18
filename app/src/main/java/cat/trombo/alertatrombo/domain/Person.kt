@@ -19,7 +19,7 @@ class Person(val name: String,
 
     var cholesterol: Double = 15.0 // alto -> 210.0
 
-    var vitamins: Double = 40.0
+    var vitamins: Double = 30.0
 
     var stressLevel: Int = 5
 

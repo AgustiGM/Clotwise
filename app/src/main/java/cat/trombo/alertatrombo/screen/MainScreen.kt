@@ -146,16 +146,17 @@ fun MainScreen(navController: NavHostController) {
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
-                                Button(onClick = { viewModel.returnEventState(0) }) {
+                                Button(onClick = { viewModel.returnEventState(0) },
+                            colors = ButtonDefaults.buttonColors(DarkBackground)) {
 
-                                    Text(uiState.currentEvent!!.options[0])
+                                    Text(uiState.currentEvent!!.options[0], color = Color.White)
                                 }
 
                                 if(uiState.currentEvent!!.options.size > 1) {
                                     Spacer(modifier = Modifier)
-                                    Button(onClick = { viewModel.returnEventState(1) }) {
+                                    Button(onClick = { viewModel.returnEventState(1) }, colors = ButtonDefaults.buttonColors(DarkBackground)) {
 
-                                        Text(uiState.currentEvent!!.options[1])
+                                        Text(uiState.currentEvent!!.options[1], color = Color.White)
                                     }
                                 }
                             }
@@ -211,15 +212,16 @@ fun MainScreen(navController: NavHostController) {
                                 ) {
                                     Button(onClick = { viewModel.returnEventState(0) }) {
 
-                                        Text(uiState.currentEvent!!.options[0])
-                                    }
+                                        Text(uiState.currentEvent!!.options[0],
+                                    color = Color.White)}
 
                                     if(uiState.currentEvent!!.options.size > 1) {
                                         Spacer(modifier = Modifier)
-                                        Button(onClick = { viewModel.returnEventState(1) }) {
+                                        Button(onClick = { viewModel.returnEventState(1) },
+                                    colors = ButtonDefaults.buttonColors(DarkBackground)) {
 
-                                            Text(uiState.currentEvent!!.options[1])
-                                        }
+                                            Text(uiState.currentEvent!!.options[1],
+                                        color = Color.White)}
                                     }
                                 }
                             }
@@ -278,7 +280,7 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
                 if(j != null){
                     Column {
                         j.forEach { message ->
-                            Text(message.name+" (level of activity = "+ message.activity+"%)")
+                            Text(message.name+" (Nivell d'activitat = "+ message.activity+"%)")
                         }
                     }
                 }
@@ -288,7 +290,7 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
                 if(h != null){
                     Column {
                         h.forEach { message ->
-                            Text(message.name+" (level of sedentarism = "+ message.sedentarism+"%)")
+                            Text(message.name+" (Nivell de sedentarisme = "+ message.sedentarism+"%)")
                         }
                     }
                 }
@@ -310,9 +312,9 @@ fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
                     .padding(15.dp)
                     .fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
                     Text("Gana: "+p.hunger +"/100")
-                    Text("Sed: "+p.waterIntake +"/100")
-                    Text("Glucosa en sang: "+p.glucose +" mg/dl")
-                    Text("Colesterol en sang: " + p.cholesterol +" mg/dl")
+                    Text("Set: "+p.waterIntake +"/100")
+                    Text("Glucosa en sang: "+p.glucose*100 +" mg/dl")
+                    Text("Colesterol en sang: " + p.cholesterol*100 +" mg/dl")
                     Text("Nivells d'estrès: "+p.stressLevel+"0%")
                     Text("Nivells d'activitat : "+p.activityLevel+"%")
 
