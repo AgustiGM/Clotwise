@@ -67,6 +67,7 @@ fun LoginPage(navController: NavHostController) {
         TextField(
             label = { Text(text = "Pes") },
             value = pes.value,
+            //placeholder = { Text(text = "Your Placeholder/Hint") },
             onValueChange = { pes.value = it })
 
 
