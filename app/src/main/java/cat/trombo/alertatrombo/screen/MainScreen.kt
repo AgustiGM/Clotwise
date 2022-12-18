@@ -146,12 +146,14 @@ fun MainScreen(navController: NavHostController) {
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             Button(onClick = { viewModel.returnEventState(0) }) {
+
                                 Text(uiState.currentEvent!!.options[0])
                             }
                             
                             if(uiState.currentEvent!!.options.size > 1) {
                                 Spacer(modifier = Modifier)
                                 Button(onClick = { viewModel.returnEventState(1) }) {
+
                                     Text(uiState.currentEvent!!.options[1])
                                 }
                             }
