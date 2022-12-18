@@ -65,8 +65,8 @@ object MainScreenVM : ViewModel() {
                 "Per fi és divendres, què fas per esbargir-te?",
                             List(2,fun(a: Int): String {
                              return when(a) {
-                                 0 -> "Donar-ho tot al bar"
-                                 1 -> "Sofà i manta"
+                                 0 -> "Sofà i manta"
+                                 1 -> "Donar-ho tot al bar"
                             else -> "No fer res"
                     }
                 }))
@@ -77,6 +77,7 @@ object MainScreenVM : ViewModel() {
     }
 
     fun returnEventState(option: Int){
+        updateState(cevent,launched = false, currentUser!!.vitamins)
         when(option) {
             0 -> updatePerson(currentUser,1)
             1 -> updatePerson(currentUser,0)
@@ -87,7 +88,7 @@ object MainScreenVM : ViewModel() {
 
     private fun updatePerson(currentUser: Person?, i: Int) {
         if (currentUser != null) {
-            if (i == 0) {
+            if (i == 1) {
                 currentUser.vitamins += 1
                 currentUser.activityLevel +1
             }
@@ -95,7 +96,9 @@ object MainScreenVM : ViewModel() {
                 currentUser.cholesterol +=1
                 currentUser.glucose += 1
                 currentUser.stressLevel += 1
+                currentUser.vitamins = currentUser.vitamins
             }
+            updateState(cevent,false,currentUser.vitamins)
         }
     }
 
@@ -104,18 +107,18 @@ object MainScreenVM : ViewModel() {
         if (EventManager.eventQueue.size >= 1) {
 
             delay(abs(Random(54).nextLong()%8000))
-            cevent = null
-            updateState(cevent)
             cevent = EventManager.getEvent()
-            updateState(cevent)
+            updateState(cevent, true, currentUser!!.vitamins)
             }
         }
     }
 
-    private fun updateState(cevent: LifeEvent?) {
+    private fun updateState(cevent: LifeEvent?, launched: Boolean, vit: Double) {
         _uiState.update {  currentState ->
             currentState.copy(
-                currentEvent = cevent
+                currentEvent = cevent,
+                launched = launched,
+                vit = vit
             )
         }
 

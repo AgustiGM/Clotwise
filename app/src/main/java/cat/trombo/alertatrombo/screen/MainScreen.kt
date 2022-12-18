@@ -94,7 +94,7 @@ fun MainScreen(navController: NavHostController) {
         }
 
 
-        if (uiState.currentEvent != null) {
+        if (uiState.launched) {
             Popup(
                 alignment = Alignment.Center,
             ) {
