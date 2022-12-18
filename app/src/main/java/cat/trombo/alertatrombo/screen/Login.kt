@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -73,19 +75,25 @@ fun LoginPage(navController: NavHostController) {
             TextField(
                 label = { Text(text = "Edat") },
                 value = edat.value,
-                onValueChange = { edat.value = it })
+                onValueChange = { edat.value = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
                 label = { Text(text = "Alçada") },
                 value = alcada.value,
-                onValueChange = { alcada.value = it })
+                onValueChange = { alcada.value = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
                 label = { Text(text = "Pes") },
                 value = pes.value,
-                onValueChange = { pes.value = it })
+                onValueChange = { pes.value = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
 
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -94,9 +102,10 @@ fun LoginPage(navController: NavHostController) {
                 onValueChange = { sexe.value = it },
 
                 label = { Text("Gènere") },
+                readOnly = true,
                 trailingIcon = {
                     Button(onClick = { expanded.value = !expanded.value }) {
-                        Text("desplega")
+                        Text("+")
                     }
                 }
             )
