@@ -174,7 +174,7 @@ fun CustomProgressBar() {
                 .fillMaxWidth(size2),
             horizontalArrangement = Arrangement.End
         ) {
-            Text(text = "RISC: $progressCount2")
+            Text(text = "RISC: $progressCount2%")
         }
 
         Box(

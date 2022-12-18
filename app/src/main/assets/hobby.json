@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Còrrer",
-    "sedentarism": 5,
+    "name": "Córrer",
+    "sedentarism": 10,
     "healthy": 70,
     "hunger": 30,
     "water": 50
