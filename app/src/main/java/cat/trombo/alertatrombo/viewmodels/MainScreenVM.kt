@@ -77,8 +77,26 @@ object MainScreenVM : ViewModel() {
     }
 
     fun returnEventState(option: Int){
-//        updateState(null);
+        when(option) {
+            0 -> updatePerson(currentUser,1)
+            1 -> updatePerson(currentUser,0)
+            else -> 1+1
+        }
         run();
+    }
+
+    private fun updatePerson(currentUser: Person?, i: Int) {
+        if (currentUser != null) {
+            if (i == 0) {
+                currentUser.vitamins += 1
+                currentUser.activityLevel +1
+            }
+            else {
+                currentUser.cholesterol +=1
+                currentUser.glucose += 1
+                currentUser.stressLevel += 1
+            }
+        }
     }
 
     private fun run() {
