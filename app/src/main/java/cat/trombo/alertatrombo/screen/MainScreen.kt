@@ -3,6 +3,7 @@ package cat.trombo.alertatrombo.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,7 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 import androidx.navigation.NavHostController
 import cat.trombo.alertatrombo.R
-import cat.trombo.alertatrombo.domain.Person
+import cat.trombo.alertatrombo.domain.*
 import cat.trombo.alertatrombo.events.LifeEvent
 import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 import cat.trombo.alertatrombo.ui.theme.*
@@ -38,6 +39,22 @@ fun MainScreen(navController: NavHostController) {
 
     val viewModel = MainScreenVM
     val p: Person? = viewModel.currentUser
+
+    //viewModel.iniMisc(LocalContext.current)
+    var f: List<Food>? = null
+    var j: List<Job>? = null
+    var h: List<Hobby>? = null
+
+    if(viewModel.foodList != null){
+        f = viewModel.foodList
+    }
+    if(viewModel.jobList != null){
+        j = viewModel.jobList
+    }
+    if(viewModel.hobbyList != null){
+        h = viewModel.hobbyList
+    }
+
 
 //    val e : LifeEvent? = viewModel.currentEvent
     val uiState by viewModel.uiState.collectAsState()
@@ -70,13 +87,13 @@ fun MainScreen(navController: NavHostController) {
                 CustomProgressBar()
             }
 
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .padding(8.dp)
-                    .background(color = Color.Green)
-                    .height(150.dp)
-            )
+//            Box(
+//                modifier = Modifier
+//                    .clip(RoundedCornerShape(20.dp))
+//                    .padding(8.dp)
+//                    .background(color = Color.Green)
+//                    .height(150.dp)
+//            )
 //             Bottom box with tabs
             Box(
                 modifier = Modifier
@@ -87,7 +104,7 @@ fun MainScreen(navController: NavHostController) {
                 //TabOnlyTitle()
                 //CustomTabs()
                 if (p != null) {
-                    tabs(p)
+                    tabs(p, f, j, h)
                 }
             }
 
@@ -108,7 +125,8 @@ fun MainScreen(navController: NavHostController) {
                 ) {
                     Column(
                         modifier = Modifier
-                            .padding(8.dp).fillMaxHeight(),
+                            .padding(8.dp)
+                            .fillMaxHeight(),
                         verticalArrangement = Arrangement.SpaceEvenly
                     ) {
                         uiState.currentEvent?.title?.let {
@@ -165,7 +183,7 @@ fun MainScreen(navController: NavHostController) {
 
 //@Preview()
 @Composable
-fun tabs(p:Person) {
+fun tabs(p:Person, f:List<Food>?,j: List<Job>?, h: List<Hobby>?) {
     var tabIndex by remember { mutableStateOf(0) } // 1.
     val tabTitles = listOf("Menjar", "Feina", "Oci", "Info")
     Column { // 2.
@@ -178,32 +196,36 @@ fun tabs(p:Person) {
             }
         }
         when (tabIndex) { // 6.
-            0 -> Box(modifier = Modifier.padding(6.dp)){
-                Text("Hola\nHola\nHola")
+            0 -> Box(modifier = Modifier.padding(8.dp)){
+                if(f != null){
+                    Column {
+                        f.forEach { message ->
+                            Text(message.name+" ("+ message.calories+" calories)")
+                        }
+                    }
+                }
+
             }//Text("Hello content")
-            1 -> Row( modifier = Modifier
-                .padding(6.dp)
-                .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
-                Column(){
-                    Text("Hola")
-                    Text("Hola")
-                    Text("Hola")
-                    Text("Hola")
-                    Text("Hola")
-                    Text("Hola")
-                    Text("Hola")
+            1 -> Box(modifier = Modifier.padding(8.dp)){
+                if(j != null){
+                    Column {
+                        j.forEach { message ->
+                            Text(message.name+" (level of activity = "+ message.activity+"%)")
+                        }
+                    }
                 }
-                Column(){
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                }
+
             }
-            2-> Text("There content")
+            2-> Box(modifier = Modifier.padding(8.dp)){
+                if(h != null){
+                    Column {
+                        h.forEach { message ->
+                            Text(message.name+" (level of sedentarism = "+ message.sedentarism+"%)")
+                        }
+                    }
+                }
+
+            }
             3 -> Row( modifier = Modifier
                 .padding(6.dp)
                 .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){

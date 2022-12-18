@@ -12,6 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import cat.trombo.alertatrombo.domain.*
 import cat.trombo.alertatrombo.events.EventManager
 import cat.trombo.alertatrombo.events.LifeEvent
+import cat.trombo.alertatrombo.repo.JsonObjectRepo
 import cat.trombo.alertatrombo.repo.JsonPersonDataRepo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,13 +33,19 @@ object MainScreenVM : ViewModel() {
     private val _uiState = MutableStateFlow(MSUiState(null))
     val uiState: StateFlow<MSUiState> = _uiState.asStateFlow()
 
-//    val foodList: List<Food> = JsonObjectRepo.loadFoods(context)
-//    val jobList: List<Job> = JsonObjectRepo.loadJobs(context)
-//    val hobbyList: List<Hobby> = JsonObjectRepo.loadHobbies(context)
-//    val conditionList: List<Condition> = JsonObjectRepo.loadConditions(context)
+    var foodList: List<Food>? = null// = JsonObjectRepo.loadFoods(context)
+    var jobList: List<Job>? = null// = JsonObjectRepo.loadJobs(context)
+    var hobbyList: List<Hobby>? = null// = JsonObjectRepo.loadHobbies(context)
+//    var conditionList: List<Condition>? = null// = JsonObjectRepo.loadConditions(context)
 
 
     var cevent : LifeEvent? = null
+
+    fun iniMisc(context: Context){
+        foodList = JsonObjectRepo.loadFoods(context)
+        jobList = JsonObjectRepo.loadJobs(context)
+        hobbyList = JsonObjectRepo.loadHobbies(context)
+    }
 
     private fun initEvents() {
         val e1: LifeEvent = LifeEvent("Tens gana",
@@ -77,7 +84,7 @@ object MainScreenVM : ViewModel() {
     }
 
     fun returnEventState(option: Int){
-//        updateState(null);
+        updateState(null);
         run();
     }
 
