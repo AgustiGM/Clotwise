@@ -28,20 +28,26 @@ import cat.trombo.alertatrombo.viewmodels.MainScreenVM
 @Composable
 fun CustomProgressBar() {
 
-    val context = LocalContext.current
     var progressCount: Int by remember { mutableStateOf(0) }
     var progressCount2: Int by remember { mutableStateOf(0) }
     var progress by remember { mutableStateOf(0f) }
     var progress2 by remember { mutableStateOf(0f) }
 
+
+
     val viewModel = MainScreenVM
+
+    val uiState by viewModel.uiState.collectAsState()
     val p: Person = viewModel.currentUser!!
+    val vit by remember {
+        mutableStateOf(uiState.vit)
+    }
 
     //var vida = vitamins +activityLevel - hunger- waterintake-glucose-cholesterol-stressLevel
     //var risc = hunger + waterintake + stressLevel + cholesterol + glucose -vitamins - activityLevel
 
 
-    progressCount = p.vitamins.toInt() + p.activityLevel - p.hunger - p.waterIntake - p.glucose.toInt() - p.cholesterol.toInt() - p.stressLevel
+    progressCount = uiState.vit.toInt() + p.activityLevel - p.hunger - p.waterIntake - p.glucose.toInt() - p.cholesterol.toInt() - p.stressLevel
     progressCount2 = 100 - progressCount
     if (progressCount2 > 100) progressCount2 = 100
     if (progressCount2 < 0) progressCount2 = 0
