@@ -58,7 +58,7 @@ fun MainScreen(navController: NavHostController) {
                     .padding(8.dp)
                     .fillMaxWidth()
                     .clip(shape)
-                    .background(color = Color.Red.copy(alpha = 0.5f))
+                    .background(color = LightBackground.copy(alpha = 0.5f))
                     .height(75.dp)/*, backgroundColor = Color.Red*/
             ) {
                 CustomProgressBar()
@@ -76,7 +76,7 @@ fun MainScreen(navController: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(300.dp)
-                    .background(color = Background)
+                    .background(color = LightBackground)
             ) {
                 //TabOnlyTitle()
                 //CustomTabs()
@@ -169,7 +169,7 @@ fun tabs(p:Person) {
             tabTitles.forEachIndexed { index, title ->
                 Tab(selected = tabIndex == index, // 4.
                     onClick = { tabIndex = index },
-                     modifier = Modifier.background(color = DarkBackground),
+                     modifier = Modifier.background(color = LightBackground2),
                     text = { Text(text = title) }) // 5.
             }
         }

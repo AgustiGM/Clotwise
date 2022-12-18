@@ -192,7 +192,7 @@ fun CustomProgressBar() {
                     .fillMaxWidth(size2)
                     .fillMaxHeight()
                     .clip(RoundedCornerShape(9.dp))
-                    .background(DarkBackground)
+                    .background(LightBackground2)
                     .animateContentSize()
             )
         }
