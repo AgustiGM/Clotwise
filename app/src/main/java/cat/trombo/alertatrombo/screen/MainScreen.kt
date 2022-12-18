@@ -111,7 +111,11 @@ fun MainScreen(navController: NavHostController) {
                             Text(
                                 uiState.currentEvent!!.title,
                                 color = DarkText,
-                                fontWeight = FontWeight.Bold
+                                fontWeight = FontWeight.Bold,
+                            )
+                            Text(
+                                uiState.currentEvent!!.description,
+                                color = DarkText,
                             )
 
                         Row(
