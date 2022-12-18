@@ -75,13 +75,13 @@ fun MainScreen(navController: NavHostController) {
                     .clip(RoundedCornerShape(20.dp))
                     .padding(8.dp)
                     .background(color = Color.Green)
-                    .height(100.dp)
+                    .height(150.dp)
             )
 //             Bottom box with tabs
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp)
+                    .height(300.dp)
                     .background(color = Background)
             ) {
                 //TabOnlyTitle()
@@ -127,13 +127,15 @@ fun MainScreen(navController: NavHostController) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Button(onClick = { viewModel.returnEventState(1) }) {
+                            Button(onClick = { viewModel.returnEventState(0) }) {
+
                                 Text(uiState.currentEvent!!.options[0])
                             }
                             
                             if(uiState.currentEvent!!.options.size > 1) {
                                 Spacer(modifier = Modifier)
-                                Button(onClick = { viewModel.returnEventState(2) }) {
+                                Button(onClick = { viewModel.returnEventState(1) }) {
+
                                     Text(uiState.currentEvent!!.options[1])
                                 }
                             }
@@ -216,14 +218,16 @@ fun tabs(p:Person) {
                     Text("Altura: "+p.height)
                     Text("Pes: "+p.weight)
                 }
-                Column(){
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
-                    Text("Adeu")
+                Column(modifier = Modifier
+                    .padding(15.dp)
+                    .fillMaxHeight(), verticalArrangement = Arrangement.SpaceEvenly){
+                    Text("Gana: "+p.hunger +"/100")
+                    Text("Sed: "+p.waterIntake +"/100")
+                    Text("Glucosa en sang: "+p.glucose +" mg/dl")
+                    Text("Colesterol en sang: " + p.cholesterol +" mg/dl")
+                    Text("Nivells d'estrès: "+p.stressLevel+"0%")
+                    Text("Nivells d'activitat : "+p.activityLevel+"%")
+
                 }
             }
         }
