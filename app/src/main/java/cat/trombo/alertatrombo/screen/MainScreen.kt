@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -37,10 +38,11 @@ fun MainScreen(navController: NavHostController) {
     val viewModel = MainScreenVM
     val p: Person? = viewModel.currentUser
 
-    //viewModel.iniMisc(LocalContext.current)
+    viewModel.iniMisc(LocalContext.current)
     var f: List<Food>? = null
     var j: List<Job>? = null
     var h: List<Hobby>? = null
+    var contadorEvent by remember { mutableStateOf(0) }
 
     if(viewModel.foodList != null){
         f = viewModel.foodList
@@ -179,6 +181,7 @@ fun MainScreen(navController: NavHostController) {
                 }
             }
         }
+
     }
 }
 
