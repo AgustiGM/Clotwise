@@ -46,6 +46,7 @@ fun CustomProgressBar() {
     //var vida = vitamins +activityLevel - hunger- waterintake-glucose-cholesterol-stressLevel
     //var risc = hunger + waterintake + stressLevel + cholesterol + glucose -vitamins - activityLevel
 
+
     progressCount = uiState.vit.toInt() + p.activityLevel - p.hunger - p.waterIntake - p.glucose.toInt() - p.cholesterol.toInt() - p.stressLevel
     progressCount2 = 100 - progressCount
     if (progressCount2 > 100) progressCount2 = 100
