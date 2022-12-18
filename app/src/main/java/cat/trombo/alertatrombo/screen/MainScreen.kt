@@ -144,16 +144,20 @@ fun MainScreen(navController: NavHostController) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            Button(onClick = { viewModel.returnEventState(0) }) {
+                            Button(onClick = { viewModel.returnEventState(0) },
+                            colors = ButtonDefaults.buttonColors(DarkBackground)) {
 
-                                Text(uiState.currentEvent!!.options[0])
+                                Text(uiState.currentEvent!!.options[0],
+                                color = Color.White)
                             }
                             
                             if(uiState.currentEvent!!.options.size > 1) {
                                 Spacer(modifier = Modifier)
-                                Button(onClick = { viewModel.returnEventState(1) }) {
+                                Button(onClick = { viewModel.returnEventState(1) },
+                                    colors = ButtonDefaults.buttonColors(DarkBackground)) {
 
-                                    Text(uiState.currentEvent!!.options[1])
+                                    Text(uiState.currentEvent!!.options[1],
+                                    color = Color.White)
                                 }
                             }
                         }
