@@ -27,6 +27,7 @@ object MainScreenVM : ViewModel() {
     fun initialize() {
         initEvents();
         run();
+        updateState(null,false, currentUser!!.vitamins)
     }
 
     private val _uiState = MutableStateFlow(MSUiState(null))
