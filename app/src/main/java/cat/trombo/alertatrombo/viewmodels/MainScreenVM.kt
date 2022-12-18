@@ -77,6 +77,7 @@ object MainScreenVM : ViewModel() {
     }
 
     fun returnEventState(option: Int){
+        updateState(cevent,launched = false)
         when(option) {
             0 -> updatePerson(currentUser,1)
             1 -> updatePerson(currentUser,0)
@@ -104,18 +105,17 @@ object MainScreenVM : ViewModel() {
         if (EventManager.eventQueue.size >= 1) {
 
             delay(abs(Random(54).nextLong()%8000))
-            cevent = null
-            updateState(cevent)
             cevent = EventManager.getEvent()
-            updateState(cevent)
+            updateState(cevent, true)
             }
         }
     }
 
-    private fun updateState(cevent: LifeEvent?) {
+    private fun updateState(cevent: LifeEvent?, launched: Boolean) {
         _uiState.update {  currentState ->
             currentState.copy(
-                currentEvent = cevent
+                currentEvent = cevent,
+                launched = launched
             )
         }
 
