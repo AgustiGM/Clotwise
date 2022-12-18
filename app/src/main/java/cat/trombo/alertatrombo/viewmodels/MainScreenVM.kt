@@ -24,7 +24,7 @@ import kotlin.math.abs
 
 object MainScreenVM : ViewModel() {
 
-    init {
+    fun initialize() {
         initEvents();
         run();
     }
@@ -41,20 +41,43 @@ object MainScreenVM : ViewModel() {
     var cevent : LifeEvent? = null
 
     private fun initEvents() {
-        val e1: LifeEvent = LifeEvent("Et toca la loteria",
-                                    "Has guanyat la loteria tot i no participar-hi",
-                                    List(1,fun(a: Int): String {return "Opció: $a" }))
+        val e1: LifeEvent = LifeEvent("Tens gana",
+                                    "Què vols fer per matar el cuquet?",
+                                    List(2,fun(a: Int): String {
+                                        return when(a) {
+                                            0 -> "Anar al supermercat"
+                                            1 -> "Tirar de fast food"
+                                            else -> "No fer res"
+                                        }
+                                    }))
 
         val e2: LifeEvent = LifeEvent("Et fa mal la cama",
                                 "Fa uns dies que et fa mal la cama, què fas?",
-                                 List(3,fun(a: Int): String {return "Opció: $a" }))
+                                List(2,fun(a: Int): String {
+                                    return when(a) {
+                                        0 -> "Anar al metge"
+                                        1 -> "Són cruiximents"
+                                        else -> "No fer res"
+                                    }
+                                }))
+
+        val e3: LifeEvent = LifeEvent("Divendres a la tarda",
+                "Per fi és divendres, què fas per esbargir-te?",
+                            List(2,fun(a: Int): String {
+                             return when(a) {
+                                 0 -> "Donar-ho tot al bar"
+                                 1 -> "Sofà i manta"
+                            else -> "No fer res"
+                    }
+                }))
 
         EventManager.addEvent(e1)
         EventManager.addEvent(e2)
+        EventManager.addEvent(e3)
     }
 
-    fun ReturnEventState(option: Int){
-        updateState(null);
+    fun returnEventState(option: Int){
+//        updateState(null);
         run();
     }
 
@@ -64,9 +87,9 @@ object MainScreenVM : ViewModel() {
 
             delay(abs(Random(54).nextLong()%8000))
             cevent = null
+            updateState(cevent)
             cevent = EventManager.getEvent()
             updateState(cevent)
-
             }
         }
     }
@@ -80,11 +103,7 @@ object MainScreenVM : ViewModel() {
 
     }
 
-
-
     var currentUser : Person? = null
-
-
 
     fun setPerson (name: String, gender: Gender, age: Int, height: Double, weight: Double/*, job: Job*/ ){
 
@@ -93,13 +112,12 @@ object MainScreenVM : ViewModel() {
         this.currentUser?.age  =  age
         this.currentUser?.height = height
         this.currentUser?.weight = weight
-       // this.currentUser?.job = job
 
         println(this.currentUser?.age)
         println(this.currentUser?.weight)
         println(this.currentUser?.height)
         println(this.currentUser?.name)
-
+        this.initialize()
     }
 
     val repo = JsonPersonDataRepo();
